@@ -5,34 +5,7 @@
 
 /* PROTOTYPES*/
 
-struct Card draw_card ();
-int sum_cards (int, Card*);
-bool isRed(Card);
-
-struct Card draw_card () {
-  enum Suit current_suit;
-  switch (rand()%4) {
-    case 0:
-      current_suit = HEARTS;
-      break;
-    case 1:
-      current_suit = DIAMONDS;
-      break;
-    case 2:
-      current_suit = SPADES;
-      break;
-    case 3:
-      current_suit = CLUBS;
-      break;
-    default:
-      printf("Something went wrong in the suit picker!!\nWe're making it a clubs anyway\n");
-      current_suit = CLUBS;
-      break;
-  }
-  Card current_card = {current_suit, (char)(rand()%13)};
-  return current_card;
-}
-
+/*
 
 int main() {
   Card hand[10];
@@ -46,3 +19,4 @@ int main() {
   printf("The total of the ten cards is %d!\n", sum_cards(10, hand));
   return 1;
 }
+*/

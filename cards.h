@@ -1,6 +1,11 @@
 #ifndef CARDS
 #define  CARDS
 
+struct Card draw_card ();
+int sum_cards (int, Card*);
+bool isRed(Card);
+
+
 enum Suit {
   HEARTS,
   SPADES,
