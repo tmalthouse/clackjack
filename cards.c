@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "cards.h"
+
 
 bool is_red(Card card) {
   if (card.suit == HEARTS || card.suit == DIAMONDS) {

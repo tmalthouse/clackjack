@@ -1,9 +1,9 @@
-$CC=/usr/bin/c99
-$CFLAGS="-O1 -Wall"
-$OUT="dealer"
+cc = /usr/bin/c99
+cflags = -O2 -Wall
+output = dealer
 
 dealer:
-	c99 dealer.c cards.c -O1 -Wall -odealer
+	$(cc) dealer.c cards.c $(cflags) -o$(output)
 
 clean:
-	rm $OUT
+	rm $(output)
