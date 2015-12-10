@@ -3,7 +3,7 @@ $CFLAGS="-O1 -Wall"
 $OUT="dealer"
 
 dealer:
-	c99 dealer.c -O1 -Wall -odealer
+	c99 dealer.c cards.c -O1 -Wall -odealer
 
 clean:
 	rm $OUT
