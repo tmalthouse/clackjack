@@ -1,9 +1,8 @@
+#include <stdbool.h>
 #ifndef CARDS
 #define  CARDS
 
-struct Card draw_card ();
-int sum_cards (int, Card*);
-bool isRed(Card);
+
 
 
 enum Suit {
@@ -19,5 +18,9 @@ struct Card {
   enum Suit suit;
   char value; //1 is aces, 2-10 are normal, 11 is jack, etc.
 };
+
+struct Card draw_card ();
+int sum_cards (int numcards, Card* cardlist);
+bool isRed(Card card);
 
 #endif
