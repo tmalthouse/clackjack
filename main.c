@@ -12,11 +12,7 @@ int main() {
   startgame();
 }
 
-void add_card (Card *cardlist, int *pos) {
-  cardlist[*pos] = draw_card();
-  *pos+=1;
-  return;
-}
+
 
 void startgame() {
   Card hand[21]; //We'll never need more cards than this
@@ -28,7 +24,7 @@ void startgame() {
 
   add_card(hand, &next_card);
   add_card(hand, &next_card);
-  printf("Your initial total is %d\n", sum_cards(num, hand));;
+  printf("Your initial total is %d\n", sum_cards(num, hand));
 
   while (sum_cards(num,hand)<21 && !hold) {
     char ans;
