@@ -32,13 +32,12 @@ void startgame() {
 
   while (sum_cards(num,hand)<21 && !hold) {
     char ans;
-    printf("Your cards are:\n");
-    for (int i=0;i<num;i++) {
-      printf("%s of %s\n",get_value(hand[i]), get_suit(hand[i]));
-    }
+
+    list_cards(hand, num);
 
     printf("Draw another card? (y/n)\n");
 
+    //Wait for input (that's not \n)
     while ((ans = getchar()) == '\n');
 
     if (ans == 'n') {
@@ -47,13 +46,18 @@ void startgame() {
     else if (ans == 'y') {
       add_card(hand, &next_card);
       num+=1;
-      printf("Your new total is %d\n", sum_cards(num,hand));
+      printf("\n\nYour new total is %d\n", sum_cards(num,hand));
     }
     else {
       printf("You didn't do that right, pal\n");
     }
   }
+  if (sum_cards(num,hand)>21) {
+    printf("You went over! Better luck next time\n");
+  } else {
+    printf("You held!\n");
+  }
+  list_cards(hand,num);
 
-  printf("THis is the end of the loop\n" );
   return;
 }

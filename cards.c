@@ -86,3 +86,17 @@ const char* get_value (Card card) {
   const char* CARD_NAMES[13] = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
   return CARD_NAMES[val];
 }
+
+void disp_card(Card card) {
+  printf("%s of %s\n",get_value(card), get_suit(card));
+  return;
+}
+
+void list_cards(Card* hand, int num) {
+  //List the current cards
+  printf("Your cards are:\n");
+  for (int i=0;i<num;i++) {
+    disp_card(hand[i]);
+  }
+  return;
+}

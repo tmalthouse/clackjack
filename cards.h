@@ -26,4 +26,7 @@ bool isRed(Card card);
 const char* get_value (Card card);
 const char* get_suit (Card card);
 
+void disp_card(Card card);
+void list_cards(Card* hand, int num);
+
 #endif
