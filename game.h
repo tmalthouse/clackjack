@@ -4,7 +4,6 @@
 #include <stdbool.h>
 
 
-void add_card(Card *cardlist, int *pos);
 
 typedef struct Game Game;
 
@@ -15,5 +14,11 @@ struct Game {
   int next_card;
   bool hold;
 };
+
+Game new_game();
+void add_card(Game *game);
+void sum (Game *game);
+void list_cards (Game game);
+void update (Game *game);
 
 #endif

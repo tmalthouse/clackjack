@@ -3,9 +3,10 @@
 #include <stdbool.h>
 #include <time.h>
 #include "cards.h"
+#include "game.h"
 
 void startgame();
-void add_card(Card *cardlist, int *pos);
+
 
 int main() {
   srand(time(NULL));
@@ -15,21 +16,16 @@ int main() {
 
 
 void startgame() {
-  Card hand[21]; //We'll never need more cards than this
-  int next_card, num;
   bool hold = false;
 
-  next_card = 0;
-  num = 2;
 
-  add_card(hand, &next_card);
-  add_card(hand, &next_card);
-  printf("Your initial total is %d\n", sum_cards(num, hand));
+  Game current_game = new_game();
+  printf("Your initial total is %d\n", current_game.sum);
 
-  while (sum_cards(num,hand)<21 && !hold) {
+  while (current_game.sum<21 && !hold) {
     char ans;
 
-    list_cards(hand, num);
+    list_cards(current_game);
 
     printf("Draw another card? (y/n)\n");
 
@@ -40,20 +36,22 @@ void startgame() {
       hold = true;
     }
     else if (ans == 'y') {
-      add_card(hand, &next_card);
-      num+=1;
-      printf("\n\nYour new total is %d\n", sum_cards(num,hand));
+      add_card(&current_game);
+      update(&current_game);
+      printf("\n\nYour new total is %d\n",current_game.sum);
     }
     else {
       printf("You didn't do that right, pal\n");
     }
   }
-  if (sum_cards(num,hand)>21) {
+
+
+  if (current_game.sum>21) {
     printf("You went over! Better luck next time\n");
   } else {
     printf("You held!\n");
   }
-  list_cards(hand,num);
+  list_cards(current_game);
 
   return;
 }
