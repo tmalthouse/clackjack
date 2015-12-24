@@ -1,5 +1,5 @@
 cc = /usr/bin/c99
-cflags = -O2 -Wall
+cflags = -O2
 output = dealer
 
 dealer:

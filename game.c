@@ -22,7 +22,7 @@ void update(Game *game) {
 }
 
 void add_card (Game *game) {
-  printf("%d\n", game->next_card);
+  //printf("%d\n", game->next_card);
   game->cards[game->next_card] = draw_card();
   game->next_card+=1;
   return;
