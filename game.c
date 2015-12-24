@@ -9,7 +9,7 @@ Game new_game () {
   Game game={};
   add_card(&game);
   add_card(&game);
-  sum(&game);
+  update(&game);
   return game;
 }
 
@@ -25,14 +25,11 @@ void add_card (Game *game) {
   //printf("%d\n", game->next_card);
   game->cards[game->next_card] = draw_card();
   game->next_card+=1;
-  return;
 }
 
 void list_cards(Game game) {
-  //List the current cards
   printf("Your cards are:\n");
   for (int i=0;i<game.next_card;i++) {
     disp_card(game.cards[i]);
   }
-  return;
 }
