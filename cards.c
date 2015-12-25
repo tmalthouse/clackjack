@@ -37,8 +37,6 @@ int sum_cards (int numcards, Card* cardlist) {
   return sum;
 }
 
-
-
 struct Card draw_card () {
   enum Suit current_suit;
   current_suit = rand()%4;

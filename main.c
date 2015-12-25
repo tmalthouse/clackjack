@@ -7,17 +7,13 @@
 
 void startgame();
 
-
 int main() {
   srand(time(NULL));
   startgame();
 }
 
-
-
 void startgame() {
   bool hold = false;
-
 
   Game current_game = new_game();
   printf("Your initial total is %d\n", current_game.sum);
@@ -48,10 +44,10 @@ void startgame() {
 
   if (current_game.sum>21) {
     printf("You went over! Better luck next time\n");
-  } else {
+  } else if (hold){
     printf("You held!\n");
+  } else {
+    printf("Perfect blackjack!\n");
   }
   list_cards(current_game);
-
-  return;
 }

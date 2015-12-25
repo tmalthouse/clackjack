@@ -1,9 +1,16 @@
-cc = /usr/bin/c99
+CC = gcc
 cflags = -O2
-output = dealer
+output = clackjack
+objects = dealer.o main.o cards.o game.o
 
-dealer:
-	$(cc) dealer.c main.c cards.c game.c $(cflags) -o$(output)
+clackjack: $(objects)
+	$(CC)  $(cflags) -o$(output) $(objects)
+
+dealer.o:
+main.o:
+cards.o:
+game.o:
+
 
 clean:
-	rm $(output)
+	rm $(output) *.o
