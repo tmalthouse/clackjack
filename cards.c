@@ -46,17 +46,17 @@ struct Card draw_card () {
 
 const char* get_suit (Card card) {
   int suit = card.suit;
-  const char* SUITS[4] = {"hearts","spades","clubs","diamond"};
+  const char* SUITS[] = {"hearts","spades","clubs","diamonds"};
   return SUITS[suit];
 }
 
 const char* get_value (Card card) {
   int val = card.value;
-  const char* CARD_NAMES[13] = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
+  const char* CARD_NAMES[] = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
   return CARD_NAMES[val];
 }
 
-void disp_card(Card card) {
+void disp_card(Card card) { //TODO:0 Add Ncurses based renderer
   printf("%s of %s\n",get_value(card), get_suit(card));
   return;
 }

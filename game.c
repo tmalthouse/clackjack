@@ -6,7 +6,7 @@
 
 
 Game new_game () {
-  Game game={};
+  Game game={{{0}}};
   add_card(&game);
   add_card(&game);
   update(&game);

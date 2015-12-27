@@ -1,5 +1,5 @@
 CC = gcc
-cflags = -O2
+cflags = -O2 -Wall -pedantic
 output = clackjack
 objects = dealer.o main.o cards.o game.o
 

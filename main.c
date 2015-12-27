@@ -41,7 +41,7 @@ void startgame() {
     }
   }
 
-
+  printf("\a\n");
   if (current_game.sum>21) {
     printf("You went over! Better luck next time\n");
   } else if (hold){
