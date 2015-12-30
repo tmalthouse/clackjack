@@ -30,6 +30,6 @@ void add_card (Game *game) {
 void list_cards(Game game) {
   printf("Your cards are:\n");
   for (int i=0;i<game.next_card;i++) {
-    disp_card(game.cards[i]);
+    display_card(game.cards[i]);
   }
 }

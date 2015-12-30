@@ -56,7 +56,7 @@ const char* get_value (Card card) {
   return CARD_NAMES[val];
 }
 
-void disp_card(Card card) { //TODO:0 Add Ncurses based renderer
+void display_card(Card card) { //TODO:0 Add Ncurses based renderer
   printf("%s of %s\n",get_value(card), get_suit(card));
   return;
 }
