@@ -6,7 +6,7 @@
 
 
 Game new_game () {
-  Game game={{{0}}};
+  Game game={};
   add_card(&game);
   add_card(&game);
   update(&game);
@@ -31,5 +31,28 @@ void list_cards(Game game) {
   printf("Your cards are:\n");
   for (int i=0;i<game.next_card;i++) {
     display_card(game.cards[i]);
+  }
+}
+
+void gameloop (Game *game, bool hold) {
+  char ans;
+
+  list_cards(*game);
+
+  printf("Draw another card? (y/n)\n");
+
+  //Wait for input (that's not \n)
+  while ((ans = getchar()) == '\n');
+
+  if (ans == 'n') {
+    hold = true;
+  }
+  else if (ans == 'y') {
+    add_card(game);
+    update(game);
+    printf("\n\nYour new total is %d\n",game->sum);
+  }
+  else {
+    printf("You didn't do that right, pal\n");
   }
 }

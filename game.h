@@ -20,5 +20,6 @@ void add_card(Game *game);
 void sum (Game *game);
 void list_cards (Game game);
 void update (Game *game);
+void gameloop (Game *game, bool hold);
 
 #endif /* end of include guard: BLACKJACK_GAME_H */
