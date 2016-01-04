@@ -7,12 +7,12 @@
 
 void startgame();
 
-int main() {
+int main () {
   srand(time(NULL));
   startgame();
 }
 
-void startgame() {
+void startgame () {
   bool hold = false;
 
   Game current_game = new_game();

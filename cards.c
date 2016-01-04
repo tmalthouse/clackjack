@@ -21,7 +21,7 @@ int sum_cards (int numcards, Card* cardlist) {
       sum += 10;
     }
     else if (cardlist[i].value==0) { //Assume aces are 11 unless they go over
-      ace+=1;
+      ace++;
       sum+=11;
     }
     else { //Everything else is just face value (+0 indexing)
@@ -30,14 +30,14 @@ int sum_cards (int numcards, Card* cardlist) {
   }
 
   while (ace && sum>21) { //Turn soft 11s into 1s until we're below 21
+    ace--;
     sum -=10;
-    ace -=1;
   }
 
   return sum;
 }
 
-struct Card draw_card () {
+Card draw_card () {
   enum Suit current_suit;
   current_suit = rand()%4;
   Card current_card = {current_suit, (char)(rand()%13)};
@@ -56,7 +56,7 @@ const char* get_value (Card card) {
   return CARD_NAMES[val];
 }
 
-void display_card(Card card) { //TODO:0 Add Ncurses based renderer
+void display_card (Card card) { //TODO:0 Add Ncurses based renderer
   printf("%s of %s\n",get_value(card), get_suit(card));
   return;
 }

@@ -1,9 +1,9 @@
-#ifndef GAME
-#define  GAME GAME
+#ifndef BLACKJACK_GAME_H
+#define BLACKJACK_GAME_H
+
+
 #include "cards.h"
 #include <stdbool.h>
-
-
 
 typedef struct Game Game;
 
@@ -21,4 +21,4 @@ void sum (Game *game);
 void list_cards (Game game);
 void update (Game *game);
 
-#endif
+#endif /* end of include guard: BLACKJACK_GAME_H */
