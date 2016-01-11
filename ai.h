@@ -4,6 +4,7 @@
 #define AI_CLACKJACK
 
 char get_input_robot (Game game);
-Game ai_game ();
+void robot_output (Game *game, enum SITUATIONS situ);
+Game* ai_game ();
 
 #endif /* end of include guard: AI_CLACKJACK */

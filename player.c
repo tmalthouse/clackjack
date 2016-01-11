@@ -31,16 +31,20 @@ void disp_output_stdout (Game *game, enum SITUATIONS situation) {
   switch (situation) {
     case INITIAL_TOTAL:
       printf("Welcome to clackjack!\n");
-      printf("Your total is %d.\n", game->sum);
+      printf("Your initial total is %d.\n", game->sum);
       list_cards(*game);
+      printf("Draw another card? (y/n)\n");
       break;
+
     case LOOP_TOTAL:
+      printf("\n\n\n");
       list_cards(*game);
       printf("Your total is %d.\n", game->sum);
-      printf("Draw another card? (y/n)");
+      printf("Draw another card? (y/n)\n");
       break;
+
     case END:
-      printf("Your final total was %d.\n", game->sum);
+      printf("\n\nYour final total was %d.\n", game->sum);
       if (game->sum > 21) {
         printf("You went over!\n");
       } else if (game->hold) {
@@ -48,6 +52,10 @@ void disp_output_stdout (Game *game, enum SITUATIONS situation) {
       } else {
         printf("Perfect blacjack!\n");
       }
+      break;
+
+    case ERR:
+      printf("You didn't do that right, friend!\n");
       break;
 
   }

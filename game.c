@@ -6,6 +6,7 @@
 
 Game* run_game (char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation)) {
   Game *current_game = new_game();
+  (*outputfn)(current_game, INITIAL_TOTAL);
 
   while (current_game->sum<21 && !current_game->hold) {
     gameloop(current_game, inputfn, outputfn);
@@ -48,7 +49,7 @@ Game compare_games (Game g1, Game g2) {
 
   if (g1.sum == g2.sum) {
     if (g1.next_card == g2.next_card) {
-      return g1; //This is so rare anyways
+      return g1; //This is such a rare tie anyways
     } else {
       winner = (g1.next_card < g2.next_card) ? g1 : g2; //Return the lower count
     }
@@ -61,12 +62,10 @@ Game compare_games (Game g1, Game g2) {
 
 
 
-void gameloop (Game *game, char(*inputfn)(Game game)) {
+void gameloop (Game *game, char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situ)) {
   char ans;
 
-  list_cards(*game);
-
-  printf("Draw another card? (y/n)\n");
+  //(*outputfn)(game, INITIAL_TOTAL);
 
   //Wait for input, based off the passed function pointer (this lets us change how input is recieved)
   ans = (*inputfn)(*game);
@@ -77,9 +76,9 @@ void gameloop (Game *game, char(*inputfn)(Game game)) {
   else if (ans == 'y') {
     add_card(game);
     update(game);
-    printf("\n\nYour new total is %d\n",game->sum);
+    (*outputfn)(game, LOOP_TOTAL);
   }
   else {
-    printf("You didn't do that right, pal\n");
+    (*outputfn)(game, ERR);
   }
 }

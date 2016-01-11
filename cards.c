@@ -39,7 +39,7 @@ int sum_cards (int numcards, Card* cardlist) {
 
 Card draw_card () {
   enum Suit current_suit;
-  current_suit = rand()%4;
+  current_suit = (enum Suit)(rand()%4);
   Card current_card = {current_suit, (char)(rand()%13)};
   return current_card;
 }
