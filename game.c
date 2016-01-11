@@ -4,12 +4,21 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+Game* run_game (char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation)) {
+  Game *current_game = new_game();
 
-Game new_game () {
-  Game game={};
-  add_card(&game);
-  add_card(&game);
-  update(&game);
+  while (current_game->sum<21 && !current_game->hold) {
+    gameloop(current_game, inputfn, outputfn);
+  }
+  (*outputfn)(current_game, END);
+  return current_game;
+}
+
+Game* new_game () {
+  Game *game=(Game*)malloc(sizeof(Game));
+  add_card(game);
+  add_card(game);
+  update(game);
   return game;
 }
 
@@ -34,18 +43,36 @@ void list_cards(Game game) {
   }
 }
 
-void gameloop (Game *game, bool hold) {
+Game compare_games (Game g1, Game g2) {
+  Game winner;
+
+  if (g1.sum == g2.sum) {
+    if (g1.next_card == g2.next_card) {
+      return g1; //This is so rare anyways
+    } else {
+      winner = (g1.next_card < g2.next_card) ? g1 : g2; //Return the lower count
+    }
+  } else {
+    winner = (g1.sum > g2.sum) ? g1 : g2; // Return the higher sum
+  }
+
+  return winner;
+}
+
+
+
+void gameloop (Game *game, char(*inputfn)(Game game)) {
   char ans;
 
   list_cards(*game);
 
   printf("Draw another card? (y/n)\n");
 
-  //Wait for input (that's not \n)
-  while ((ans = getchar()) == '\n');
+  //Wait for input, based off the passed function pointer (this lets us change how input is recieved)
+  ans = (*inputfn)(*game);
 
   if (ans == 'n') {
-    hold = true;
+    game->hold = true;
   }
   else if (ans == 'y') {
     add_card(game);
