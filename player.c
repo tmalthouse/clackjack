@@ -5,20 +5,16 @@
 #include "cards.h"
 #include "game.h"
 #include "player.h"
-
-Game player_game();
-
-
+/*
 int main () {
   player_game();
-}
+}*/
 
-Game player_game () {
+Game* player_game () {
   init();
   char(*inputfn)(Game) = get_input_stdin;
   void(*outputfn)(Game*, enum SITUATIONS) = disp_output_stdout;
-  run_game (inputfn, outputfn);
-
+  return run_game (inputfn, outputfn);
 }
 
 char get_input_stdin (Game game) {
@@ -37,10 +33,11 @@ void disp_output_stdout (Game *game, enum SITUATIONS situation) {
       break;
 
     case LOOP_TOTAL:
-      printf("\n\n\n");
+      printf("\n\n\nYour total is %d.\n", game->sum);
       list_cards(*game);
-      printf("Your total is %d.\n", game->sum);
-      printf("Draw another card? (y/n)\n");
+      if (game->sum<21) {
+        printf("Draw another card? (y/n)\n");
+      }
       break;
 
     case END:
@@ -55,7 +52,7 @@ void disp_output_stdout (Game *game, enum SITUATIONS situation) {
       break;
 
     case ERR:
-      printf("You didn't do that right, friend!\n");
+      printf("Something's gone wrong!!!\n");
       break;
 
   }
