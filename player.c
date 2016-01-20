@@ -5,16 +5,15 @@
 #include "cards.h"
 #include "game.h"
 #include "player.h"
-/*
-int main () {
-  player_game();
-}*/
+#include "globals.h"
 
-Game* player_game () {
+
+void *player_game (void *id) {
+  int game_id = *(int*)id;
   init();
   char(*inputfn)(Game) = get_input_stdin;
   void(*outputfn)(Game*, enum SITUATIONS) = disp_output_stdout;
-  return run_game (inputfn, outputfn);
+  return run_game (inputfn, outputfn, game_id);
 }
 
 char get_input_stdin (Game game) {

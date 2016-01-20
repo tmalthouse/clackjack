@@ -1,11 +1,13 @@
 CC = c99
-cflags = -O2 -Wall -pedantic
+CFLAGS = -O2 -Wall -pedantic
+LDFLAGS = -pthread
 output = clackjack
-objects = player.o cards.o game.o ai.o
+objects = player.o cards.o game.o ai.o main.o
 
 clackjack: $(objects)
-	$(CC)  $(cflags) -o$(output) $(objects)
+	$(CC)  $(CFLAGS) $(LDFLAGS) -o$(output) $(objects)
 
+main.o:
 player.o:
 cards.o:
 game.o:
@@ -13,4 +15,4 @@ ai.o:
 
 
 clean:
-	rm $(output) *.o
+	rm -f $(output) *.o

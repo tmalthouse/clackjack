@@ -1,15 +1,17 @@
-#include "game.h"
-#include "cards.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "globals.h"
+#include "main.h"
+#include "game.h"
+#include "cards.h"
 
-Game* run_game (char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation)) {
+Game* run_game (char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation), int id) {
   Game *current_game = new_game();
   (*outputfn)(current_game, INITIAL_TOTAL);
 
   while (current_game->sum<21 && !current_game->hold) {
-    gameloop(current_game, inputfn, outputfn);
+    gameloop(current_game, inputfn, outputfn, id);
   }
   (*outputfn)(current_game, END);
   return current_game;
@@ -62,13 +64,15 @@ Game compare_games (Game g1, Game g2) {
 
 
 
-void gameloop (Game *game, char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situ)) {
+void gameloop (Game *game, char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situ), int id) {
   char ans;
 
   //(*outputfn)(game, INITIAL_TOTAL);
 
   //Wait for input, based off the passed function pointer (this lets us change how input is recieved)
+  while (current_player!=id);
   ans = (*inputfn)(*game);
+
 
   if (ans == 'n') {
     game->hold = true;
@@ -81,4 +85,5 @@ void gameloop (Game *game, char(*inputfn)(Game game), void(*outputfn)(Game *game
   else {
     (*outputfn)(game, ERR);
   }
+  next_player();
 }

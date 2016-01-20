@@ -5,17 +5,14 @@
 #include "game.h"
 #include "cards.h"
 #include "ai.h"
+#include "globals.h"
 
-Game* robot_game () {
+void *ai_game (void* id) {
+  int game_id = *(int*)id;
   char(*inputfn)(Game) = get_input_robot;
   void(*outputfn)(Game*, enum SITUATIONS) = robot_output;
-  return run_game (inputfn, outputfn);
+  return run_game (inputfn, outputfn, game_id);
 }
-
-int main() {
-  robot_game ();
-}
-
 
 char get_input_robot (Game game) {
   if (game.sum<=17) { //super simple ai -- hit on <=17
