@@ -1,5 +1,8 @@
 #include <pthread.h>
 #include <stdio.h>
+#include <errno.h>
+#include <string.h>
+#include <stdlib.h>
 #include "player.h"
 #include "ai.h"
 
@@ -26,7 +29,10 @@ int main (int argc, char** argv) {
   }
 
   for (int i=0;i<num_players;i++) { //Once the threads are done, bind their returns to the fin_games array
-    pthread_join(tid_list[i], (void**)&finished_games[i]);
+    if (int err = pthread_join(tid_list[i], (void**)&finished_games[i])) {//If one of the threads can't return, print an error and die
+      fprintf(stderr, "Error returning from thread %d: %s\n",i,strerror(err));
+      exit(EXIT_FAILURE);
+    }
   }
 
 
