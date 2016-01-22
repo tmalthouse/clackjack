@@ -7,9 +7,8 @@
 bool is_red(Card card) {
   if (card.suit == HEARTS || card.suit == DIAMONDS) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 int sum_cards (int numcards, Card* cardlist) {

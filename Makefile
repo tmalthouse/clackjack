@@ -1,5 +1,5 @@
 CC = c99
-CFLAGS = -O2 -Wall -pedantic
+CFLAGS = -O0 -g -Wall -pedantic
 LDFLAGS = -pthread
 output = clackjack
 objects = player.o cards.o game.o ai.o main.o
