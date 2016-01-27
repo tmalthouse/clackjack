@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
+#include <string.h>
 #include "cards.h"
 #include "game.h"
 #include "player.h"
@@ -13,7 +14,15 @@ void *player_game (void *id) {
   init();
   char(*inputfn)(Game) = get_input_stdin;
   void(*outputfn)(Game*, enum SITUATIONS) = disp_output_stdout;
-  return run_game (inputfn, outputfn, game_id);
+
+  char name[20];
+  //strcpy(name, "Player");
+  printf("What's your name?\n");
+  fgets(name, 20, stdin);
+  strtok(name, "\n");//Remove the trailing \n
+  //printf("%s\n",name);
+
+  return run_game (inputfn, outputfn, game_id, name);
 }
 
 char get_input_stdin (Game game) {

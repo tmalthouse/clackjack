@@ -8,6 +8,7 @@
 
 
 volatile int current_player;
+volatile int finished_num;
 int num_players;
 
 int main (int argc, char** argv) {
@@ -22,20 +23,28 @@ int main (int argc, char** argv) {
   gametypes[1] = ai_game;
 
   pthread_t tid_list[15];
-  Game *finished_games[15];
+  Game *finished_games[15] = {NULL};
   for (int i=0;gametypes[i]!=NULL;i++) { //Create a thread for each function in the given array
     pthread_create(&tid_list[i], NULL, gametypes[i], &id_list[i]);
     num_players++;
   }
 
   for (int i=0;i<num_players;i++) { //Once the threads are done, bind their returns to the fin_games array
-    if (int err = pthread_join(tid_list[i], (void**)&finished_games[i])) {//If one of the threads can't return, print an error and die
+    int err = pthread_join(tid_list[i], (void**)&finished_games[i]);
+    //printf("Joined thread %d\n", i);
+    if (err) {//If one of the threads can't return, print an error and die
       fprintf(stderr, "Error returning from thread %d: %s\n",i,strerror(err));
       exit(EXIT_FAILURE);
     }
   }
 
+  Game *winner = compare_games (finished_games[0],finished_games[1]);
+  printf("The winner is %s, with a score of %d\n", winner->name, winner->sum);
 
+  for (int i=0;finished_games[i]!=NULL;i++) {
+    //printf("Freeing %d\n", i);
+    free(finished_games[i]);
+  }
 }
 
 void next_player () {

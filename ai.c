@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 #include "game.h"
 #include "cards.h"
 #include "ai.h"
@@ -11,7 +12,11 @@ void *ai_game (void* id) {
   int game_id = *(int*)id;
   char(*inputfn)(Game) = get_input_robot;
   void(*outputfn)(Game*, enum SITUATIONS) = robot_output;
-  return run_game (inputfn, outputfn, game_id);
+
+  char name[20];
+  strcpy(name, "Robot");
+
+  return run_game (inputfn, outputfn, game_id, name);
 }
 
 char get_input_robot (Game game) {

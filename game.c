@@ -1,19 +1,27 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include "globals.h"
 #include "main.h"
 #include "game.h"
 #include "cards.h"
 
-Game* run_game (char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation), int id) {
+Game* run_game (char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation), int id, char *name) {
   Game *current_game = new_game();
   (*outputfn)(current_game, INITIAL_TOTAL);
+  strcpy(current_game->name, name);
 
   while (current_game->sum<21 && !current_game->hold) {
     gameloop(current_game, inputfn, outputfn, id);
   }
   (*outputfn)(current_game, END);
+  finished_num++;
+  while (finished_num < num_players) {
+    if (current_player == id) {
+      next_player();
+    }
+  }
   return current_game;
 }
 
@@ -46,17 +54,17 @@ void list_cards(Game game) {
   }
 }
 
-Game compare_games (Game g1, Game g2) {
-  Game winner;
+Game *compare_games (Game *g1, Game *g2) {
+  Game *winner;
 
-  if (g1.sum == g2.sum) {
-    if (g1.next_card == g2.next_card) {
-      return g1; //This is such a rare tie anyways
+  if (g1->sum == g2->sum) {
+    if (g1->next_card == g2->next_card) {
+      winner = g1; //This is such a rare tie anyways
     } else {
-      winner = (g1.next_card < g2.next_card) ? g1 : g2; //Return the lower count
+      winner = (g1->next_card < g2->next_card) ? g1 : g2; //Return the lower count
     }
   } else {
-    winner = (g1.sum > g2.sum) ? g1 : g2; // Return the higher sum
+    winner = (g1->sum > g2->sum) ? g1 : g2; // Return the higher sum
   }
 
   return winner;
