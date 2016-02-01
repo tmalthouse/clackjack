@@ -39,7 +39,11 @@ int main (int argc, char** argv) {
   }
 
   Game *winner = compare_games (finished_games[0],finished_games[1]);
-  printf("The winner is %s, with a score of %d\n", winner->name, winner->sum);
+  if (winner==NULL) {
+    printf ("Everyone went over! Nobody wins.\n");
+  } else {
+    printf ("The winner was %s, with a score of %d!\n",winner->name,winner->sum);
+  }
 
   for (int i=0;finished_games[i]!=NULL;i++) {
     //printf("Freeing %d\n", i);

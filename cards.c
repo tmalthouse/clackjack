@@ -4,7 +4,7 @@
 #include "cards.h"
 
 
-bool is_red(Card card) {
+bool is_red (Card card) {
   if (card.suit == HEARTS || card.suit == DIAMONDS) {
     return true;
   }

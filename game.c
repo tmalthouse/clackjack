@@ -57,7 +57,11 @@ void list_cards(Game game) {
 Game *compare_games (Game *g1, Game *g2) {
   Game *winner;
 
-  if (g1->sum == g2->sum) {
+  if (g1->sum > 21 && g2->sum > 21) {
+    winner = NULL;
+  } else if ((g1->sum > 21) ^ (g2->sum > 21)) { //Bitwise xor
+    winner = (g1->sum > g2->sum) ? g2 : g1; //Otherwise the one who didn't go over wins
+  } else if (g1->sum == g2->sum) {
     if (g1->next_card == g2->next_card) {
       winner = g1; //This is such a rare tie anyways
     } else {
@@ -81,7 +85,7 @@ void gameloop (Game *game, char(*inputfn)(Game game), void(*outputfn)(Game *game
   while (current_player!=id);
   ans = (*inputfn)(*game);
 
-
+  //printf("preinput for %d\n", id);
   if (ans == 'n') {
     game->hold = true;
   }

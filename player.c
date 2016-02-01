@@ -16,8 +16,7 @@ void *player_game (void *id) {
   void(*outputfn)(Game*, enum SITUATIONS) = disp_output_stdout;
 
   char name[20];
-  //strcpy(name, "Player");
-  printf("What's your name?\n");
+  printf("What's your name?\t");
   fgets(name, 20, stdin);
   strtok(name, "\n");//Remove the trailing \n
   //printf("%s\n",name);
@@ -26,8 +25,10 @@ void *player_game (void *id) {
 }
 
 char get_input_stdin (Game game) {
+  //printf("Start of player input fn\n" );
   char ans;
   while ((ans = getchar()) == '\n');
+  //printf("End of player input fn. input was %c\n", ans);
   return ans;
 }
 

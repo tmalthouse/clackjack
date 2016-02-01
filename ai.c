@@ -14,7 +14,7 @@ void *ai_game (void* id) {
   void(*outputfn)(Game*, enum SITUATIONS) = robot_output;
 
   char name[20];
-  strcpy(name, "Robot");
+  strcpy(name, "the dealer");
 
   return run_game (inputfn, outputfn, game_id, name);
 }
