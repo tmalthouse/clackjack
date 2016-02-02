@@ -2,7 +2,7 @@
 #define CLACKJACK_PLAYER_H
 #include "game.h"
 
-char get_input_stdin (Game game);
+bool get_input_stdin (Game game);
 void disp_output_stdout (Game *game, enum SITUATIONS situation);
 void init();
 

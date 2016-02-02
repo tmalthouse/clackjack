@@ -10,7 +10,7 @@
 
 void *ai_game (void* id) {
   int game_id = *(int*)id;
-  char(*inputfn)(Game) = get_input_robot;
+  bool(*inputfn)(Game) = get_input_robot;
   void(*outputfn)(Game*, enum SITUATIONS) = robot_output;
 
   char name[20];
@@ -19,11 +19,11 @@ void *ai_game (void* id) {
   return run_game (inputfn, outputfn, game_id, name);
 }
 
-char get_input_robot (Game game) {
+bool get_input_robot (Game game) {
   if (game.sum<=17) { //super simple ai -- hit on <=17
-    return 'y';
+    return true;
   } else {
-    return 'n';
+    return false;
   }
 }
 

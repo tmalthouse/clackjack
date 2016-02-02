@@ -1,5 +1,5 @@
-CC = c99
-CFLAGS = -O0 -g -Wall -pedantic
+CC = /usr/bin/gcc
+CFLAGS = -O0 -g -Wall -pedantic -std=c99 #Using c99 is recommended on Linux, but this works better on OSX
 LDFLAGS = -pthread
 output = clackjack
 objects = player.o cards.o game.o ai.o main.o

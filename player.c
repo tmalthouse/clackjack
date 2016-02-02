@@ -10,7 +10,7 @@
 
 void *player_game (void *id) {
   int game_id = *(int*)id;
-  char(*inputfn)(Game) = get_input_stdin;
+  bool(*inputfn)(Game) = get_input_stdin;
   void(*outputfn)(Game*, enum SITUATIONS) = disp_output_stdout;
 
   char name[20];
@@ -22,11 +22,19 @@ void *player_game (void *id) {
   return run_game (inputfn, outputfn, game_id, name);
 }
 
-char get_input_stdin (Game game) {
-  //printf("Start of player input fn\n" );
-  char ans;
-  while ((ans = getchar()) == '\n');
-  //printf("End of player input fn. input was %c\n", ans);
+bool get_input_stdin (Game game) {
+  bool done, ans = false;
+  while (!done) {
+    char c;
+    while ((c = getchar()) == '\n');
+    if (c=='y' || c=='Y') {
+      ans=true;
+      done=true;
+    } else if (c=='n' || c=='N') {
+      ans=false;
+      done=true;
+    }
+  }
   return ans;
 }
 

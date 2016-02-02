@@ -8,7 +8,7 @@
 #include "game.h"
 #include "cards.h"
 
-Game* run_game (char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation), int id, char *name) {
+Game* run_game (bool(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation), int id, char *name) {
   srand(time(NULL));//Set a random seed for the cards.
   Game *current_game = new_game();
   (*outputfn)(current_game, INITIAL_TOTAL);
@@ -78,7 +78,7 @@ Game *compare_games (Game *g1, Game *g2) {
 
 
 
-void gameloop (Game *game, char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situ), int id) {
+void gameloop (Game *game, bool(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situ), int id) {
   char ans;
 
   //(*outputfn)(game, INITIAL_TOTAL);
@@ -88,10 +88,10 @@ void gameloop (Game *game, char(*inputfn)(Game game), void(*outputfn)(Game *game
   ans = (*inputfn)(*game);
 
   //printf("preinput for %d\n", id);
-  if (ans == 'n') {
+  if (ans == false) {
     game->hold = true;
   }
-  else if (ans == 'y') {
+  else if (ans == true) {
     add_card(game);
     update(game);
     (*outputfn)(game, LOOP_TOTAL);
