@@ -2,12 +2,14 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "globals.h"
 #include "main.h"
 #include "game.h"
 #include "cards.h"
 
 Game* run_game (char(*inputfn)(Game game), void(*outputfn)(Game *game, enum SITUATIONS situation), int id, char *name) {
+  srand(time(NULL));//Set a random seed for the cards.
   Game *current_game = new_game();
   (*outputfn)(current_game, INITIAL_TOTAL);
   strcpy(current_game->name, name);

@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <time.h>
 #include <string.h>
 #include "cards.h"
 #include "game.h"
@@ -11,7 +10,6 @@
 
 void *player_game (void *id) {
   int game_id = *(int*)id;
-  init();
   char(*inputfn)(Game) = get_input_stdin;
   void(*outputfn)(Game*, enum SITUATIONS) = disp_output_stdout;
 
@@ -56,17 +54,13 @@ void disp_output_stdout (Game *game, enum SITUATIONS situation) {
       } else if (game->hold) {
         printf("You held!");
       } else {
-        printf("Perfect blacjack!\n");
+        printf("Perfect blackjack!\n");
       }
       break;
 
     case ERR:
-      printf("Something's gone wrong!!!\n");
+      printf("That's not valid!\nTry again!\n");
       break;
 
   }
-}
-
-void init() {
-  srand(time(NULL));
 }
